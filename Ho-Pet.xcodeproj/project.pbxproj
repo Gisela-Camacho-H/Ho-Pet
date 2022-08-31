@@ -19,6 +19,7 @@
 		56673D6128BEA1F5006B81EF /* UIView++.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56673D6028BEA1F5006B81EF /* UIView++.swift */; };
 		56673D6628BEAFC4006B81EF /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56673D6528BEAFC4006B81EF /* SignInViewController.swift */; };
 		56673D6828BEAFD4006B81EF /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56673D6728BEAFD4006B81EF /* SignUpViewController.swift */; };
+		56EFFC8228BFA9A900F6E782 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56EFFC8128BFA9A900F6E782 /* HomeViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		56673D6028BEA1F5006B81EF /* UIView++.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView++.swift"; sourceTree = "<group>"; };
 		56673D6528BEAFC4006B81EF /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
 		56673D6728BEAFD4006B81EF /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		56EFFC8128BFA9A900F6E782 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,6 +70,7 @@
 		56673D4428BE676A006B81EF /* Ho-Pet */ = {
 			isa = PBXGroup;
 			children = (
+				56EFFC8028BFA99200F6E782 /* Home */,
 				56673D6428BEAF96006B81EF /* SignUp */,
 				56673D6328BEAF7D006B81EF /* SignIn */,
 				56673D6228BEAE38006B81EF /* Welcome */,
@@ -115,6 +118,14 @@
 				56673D6728BEAFD4006B81EF /* SignUpViewController.swift */,
 			);
 			path = SignUp;
+			sourceTree = "<group>";
+		};
+		56EFFC8028BFA99200F6E782 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				56EFFC8128BFA9A900F6E782 /* HomeViewController.swift */,
+			);
+			path = Home;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,6 +204,7 @@
 				56673D4628BE676A006B81EF /* AppDelegate.swift in Sources */,
 				56673D4828BE676A006B81EF /* SceneDelegate.swift in Sources */,
 				56673D6628BEAFC4006B81EF /* SignInViewController.swift in Sources */,
+				56EFFC8228BFA9A900F6E782 /* HomeViewController.swift in Sources */,
 				56673D5D28BEA1E1006B81EF /* UIColor++.swift in Sources */,
 				56673D6828BEAFD4006B81EF /* SignUpViewController.swift in Sources */,
 				56673D5F28BEA1EC006B81EF /* UILabel++.swift in Sources */,

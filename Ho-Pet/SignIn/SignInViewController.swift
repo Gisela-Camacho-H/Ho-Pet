@@ -15,6 +15,7 @@ class SignInViewController: UIViewController {
     private weak var emailTextField: UIView.mainTextField?
     private weak var passwordTextField: UIView.mainTextField?
     private weak var textFieldStack: UIStackView?
+    weak var validacionLabel: UIView.validacionLabel?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,10 +59,14 @@ class SignInViewController: UIViewController {
         
         //MARK: - Email TextField
         let emailTextField = UIView.mainTextField()
+        emailTextField.attributedPlaceholder = NSAttributedString(
+            string: "Email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.backgroundpink])
         self.emailTextField = emailTextField
         self.view.addSubview(emailTextField)
         
         let passwordTextField = UIView.mainTextField()
+        passwordTextField.attributedPlaceholder = NSAttributedString(
+            string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.backgroundpink])
         self.passwordTextField = passwordTextField
         passwordTextField.isSecureTextEntry = true
         self.view.addSubview(passwordTextField)
@@ -80,10 +85,16 @@ class SignInViewController: UIViewController {
         textFieldArray.forEach {button in
             textFieldStack.addArrangedSubview(button)
             }
+        
+        let validacionLabel = UIView.validacionLabel()
+        self.validacionLabel = validacionLabel
+        validacionLabel.text = ""
+        validacionLabel.textColor = .black
+        self.view.addSubview(validacionLabel)
     }
     
     func setContrains() {
-        guard let logo = logo , let titleLogin = titleLogin, let textFieldStack = textFieldStack, let signInButton = signInButton else  { return }
+        guard let logo = logo , let titleLogin = titleLogin, let textFieldStack = textFieldStack, let signInButton = signInButton, let validacionLabel = validacionLabel else  { return }
         
         NSLayoutConstraint.activate([logo.bottomAnchor.constraint(equalTo: titleLogin.bottomAnchor, constant: -60),
         logo.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -99,7 +110,12 @@ class SignInViewController: UIViewController {
             textFieldStack.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier:0.8)
                 ])
         
-        NSLayoutConstraint.activate([signInButton.topAnchor.constraint(equalTo: textFieldStack.bottomAnchor, constant: 50),
+        NSLayoutConstraint.activate([validacionLabel.topAnchor.constraint(equalTo: textFieldStack.bottomAnchor, constant: 30),
+        validacionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+        validacionLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: Constants.widthProportion)
+        ])
+        
+        NSLayoutConstraint.activate([signInButton.topAnchor.constraint(equalTo: validacionLabel.bottomAnchor, constant: 50),
         signInButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         signInButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
         signInButton.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.15),
@@ -107,6 +123,23 @@ class SignInViewController: UIViewController {
     }
     
     @objc func onloginButtonTap(){
-        print("Go to home")
+        
+        if emailTextField?.text == "" {
+                print("Empty Email")
+                validacionLabel?.text = "Write a email"
+                return
+            }
+        
+        if passwordTextField?.text == "" {
+            print("Empty password")
+            validacionLabel?.text = "Write your password"
+            return
+        } else {
+        
+        print("Go to Home")
+        let goHome = HomeViewController()
+        goHome.modalPresentationStyle = .fullScreen
+        present(goHome, animated: true, completion: nil)
+        }
     }
 }

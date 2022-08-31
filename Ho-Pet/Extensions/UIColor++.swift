@@ -13,4 +13,5 @@ extension UIColor{
     static var darkPink: UIColor = UIColor(red: 124/255, green: 76/255, blue: 58/255, alpha: 1)
     static var placeHolderGray: UIColor = UIColor(red: 199/255, green: 195/255, blue: 195/255, alpha: 1)
     static var textFieldColor: UIColor = UIColor(red: 255/255, green: 202/255, blue: 184/255, alpha: 0.3)
+    static var textFieldPlaceHolderWhite: UIColor = UIColor(red: 255/255, green: 255/255, blue: 255/255, alpha: 0.7)
 }

@@ -64,8 +64,8 @@ extension UIView{
     class validacionLabel: UILabel {
         override init(frame: CGRect){
             super.init(frame: frame)
-            apply14Font()
-            textColor = .red
+            apply20Font()
+            textColor = .white
             textAlignment = .center
             translatesAutoresizingMaskIntoConstraints = false
             numberOfLines = 0
@@ -89,6 +89,7 @@ extension UIView{
             autocorrectionType = UITextAutocorrectionType.no
             clearButtonMode = UITextField.ViewMode.whileEditing
             leftViewMode = UITextField.ViewMode.always
+            leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: frame.height))
             translatesAutoresizingMaskIntoConstraints = false
         }
         required init?(coder: NSCoder) {
@@ -106,10 +107,11 @@ extension UIView{
             layer.borderWidth = 2
             textAlignment = NSTextAlignment.left
             keyboardType = UIKeyboardType.default
-            textColor = UIColor.backgroundBlack
+            textColor = UIColor.white
             autocorrectionType = UITextAutocorrectionType.no
             clearButtonMode = UITextField.ViewMode.whileEditing
             leftViewMode = UITextField.ViewMode.always
+            leftView = UIView(frame: CGRect(x: 0, y: 0, width: 15, height: frame.height))
             translatesAutoresizingMaskIntoConstraints = false
         }
         required init?(coder: NSCoder) {

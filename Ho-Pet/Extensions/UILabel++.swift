@@ -21,11 +21,11 @@ extension UILabel{
         self.font = UIFont(name: "HoeflerText-BlackItalic", size: 25)
     }
     
-    func apply16Font(){
+    func apply20Font(){
         self.font = UIFont(name: "HoeflerText-BlackItalic", size: 20)
     }
     
-    func apply14Font(){
+    func apply16Font(){
         self.font = UIFont(name: "HoeflerText-BlackItalic", size: 16)
     }
 
