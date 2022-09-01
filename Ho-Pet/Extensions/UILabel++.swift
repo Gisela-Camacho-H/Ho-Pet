@@ -28,5 +28,9 @@ extension UILabel{
     func apply16Font(){
         self.font = UIFont(name: "HoeflerText-BlackItalic", size: 16)
     }
+    
+    func apply14Font(){
+        self.font = UIFont(name: "HoeflerText-BlackItalic", size: 14)
+    }
 
 }
