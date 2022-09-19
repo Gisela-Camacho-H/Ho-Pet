@@ -11,7 +11,6 @@ class SignUpViewController: UIViewController {
     
 
     private weak var logo: UIImageView?
-    private weak var titleLogin: UILabel?
     private weak var submitButton: UIView.pinkButton?
     private weak var nameTextField: UIView.signUpTextField?
     weak var emailTextField: UIView.signUpTextField?

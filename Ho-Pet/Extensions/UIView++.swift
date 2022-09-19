@@ -30,6 +30,7 @@ extension UIView{
                 fatalError("init(coder:) has not been implemented")
             }
         }
+
     
     class clearButton: UIButton {
         override init(frame: CGRect){
@@ -74,6 +75,20 @@ extension UIView{
             fatalError("init(coder:) has not been implemented")
         }
     }
+    
+    class collectionViewTitle: UILabel {
+        override init(frame: CGRect){
+            super.init(frame: frame)
+            backgroundColor = .black
+            textColor = UIColor.backgroundpink
+            apply16Font()
+            textAlignment = .left
+        }
+        required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+    }
+    
     
 //MARK: - Text Field
     class mainTextField: UITextField {
