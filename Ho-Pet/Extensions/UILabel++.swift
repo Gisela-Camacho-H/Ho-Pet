@@ -13,6 +13,11 @@ extension UILabel{
     func headTitle(){
         self.font = UIFont(name: "Chalkduster", size: 60)
     }
+    
+    func applyTitleFont2(){
+        self.font = UIFont(name: "HoeflerText-BlackItalic", size: 45)
+    }
+    
     func applyTitleFont(){
         self.font = UIFont(name: "HoeflerText-BlackItalic", size: 30)
     }

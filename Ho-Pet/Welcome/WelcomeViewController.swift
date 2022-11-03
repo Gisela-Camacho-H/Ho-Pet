@@ -11,9 +11,9 @@ class WelcomeViewController: UIViewController {
     
     //MARK: - Properties
     private weak var logo: UIImageView?
-    private weak var appName: UILabel?
+    var appName: UILabel?
     private weak var signInButton: UIView.clearButton?
-    private weak var signUpButton: UIView.pinkButton?
+    private weak var signUpButton: PinkButton?
     private weak var buttonStack: UIStackView?
 
     override func viewDidLoad() {
@@ -38,7 +38,7 @@ class WelcomeViewController: UIViewController {
         
         // App name
         var appName = UILabel(frame: .zero)
-        appName = UILabel(frame: CGRect(x: 0, y: 70 , width: Constants.width, height: 50))
+        appName = UILabel(frame: CGRect(x: 0, y: 100 , width: Constants.width, height: 50))
         appName.text = ""
         var charIndex = 0
        let titleText = "Ho - Pet"
@@ -49,14 +49,14 @@ class WelcomeViewController: UIViewController {
             }
             charIndex += 1
         }
-        appName.textColor = UIColor.white
+        appName.textColor = .white
         appName.headTitle()
         appName.textAlignment = .center
         self.view.addSubview(appName)
         self.appName = appName
                         
         //MARK: - Sign Up
-        let signUpButton = UIView.pinkButton()
+        let signUpButton = PinkButton()
         signUpButton.setTitle("Sign Up", for: .normal)
         signUpButton.addTarget(self, action: #selector(onSignUpButtonTap), for: .touchUpInside)
         self.view.addSubview(signUpButton)
@@ -72,7 +72,7 @@ class WelcomeViewController: UIViewController {
         //MARK: - Button Stack
         let buttonStack = UIStackView(frame: .zero)
         buttonStack.axis = .vertical
-        buttonStack.spacing = 80.0
+        buttonStack.spacing = 50.0
         buttonStack.alignment = .fill
         buttonStack.distribution = .fillEqually
         

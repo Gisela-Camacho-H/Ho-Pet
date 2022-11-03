@@ -18,19 +18,6 @@ extension UIView{
     }
     
     //MARK: - Button
-    class pinkButton: UIButton {
-        override init(frame: CGRect){
-            super.init(frame: frame)
-            backgroundColor = UIColor.backgroundpink
-            setTitleColor(.black, for: .normal)
-            layer.cornerRadius = Constants.cornerRadius
-            titleLabel?.applyTitleFont()
-        }
-            required init?(coder: NSCoder) {
-                fatalError("init(coder:) has not been implemented")
-            }
-        }
-
     
     class clearButton: UIButton {
         override init(frame: CGRect){
@@ -79,9 +66,9 @@ extension UIView{
     class collectionViewTitle: UILabel {
         override init(frame: CGRect){
             super.init(frame: frame)
-            backgroundColor = .black
-            textColor = UIColor.backgroundpink
-            apply16Font()
+            backgroundColor = .white
+            textColor = UIColor.backgroundBlack
+            apply20Font()
             textAlignment = .left
         }
         required init?(coder: NSCoder) {
@@ -135,3 +122,16 @@ extension UIView{
     }
     
 }
+
+class PinkButton: UIButton {
+    override init(frame: CGRect){
+        super.init(frame: frame)
+        backgroundColor = UIColor.backgroundpink
+        setTitleColor(.black, for: .normal)
+        layer.cornerRadius = Constants.cornerRadius
+        titleLabel?.applyTitleFont()
+    }
+        required init?(coder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
+    }

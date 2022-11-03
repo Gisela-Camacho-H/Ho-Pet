@@ -6,12 +6,13 @@
 //
 
 import UIKit
+import Firebase
 
 class SignUpViewController: UIViewController {
     
 
     private weak var logo: UIImageView?
-    private weak var submitButton: UIView.pinkButton?
+    private weak var submitButton: PinkButton?
     private weak var nameTextField: UIView.signUpTextField?
     weak var emailTextField: UIView.signUpTextField?
     private weak var passwordTextField: UIView.signUpTextField?
@@ -42,7 +43,7 @@ class SignUpViewController: UIViewController {
         self.logo = logo
                             
         //MARK: - Login
-        let signInButton = UIView.pinkButton()
+        let signInButton = PinkButton()
         signInButton.translatesAutoresizingMaskIntoConstraints = false
         signInButton.setTitle("Submit", for: .normal)
         signInButton.addTarget(self, action: #selector(onloginButtonTap), for: .touchUpInside)
@@ -135,7 +136,7 @@ class SignUpViewController: UIViewController {
     func setContrains() {
         guard let logo = logo , let textFieldStack = textFieldStack, let signInButton = submitButton, let validacionLabel = validacionLabel, let accounStackView = accounStackView else  { return }
             
-        NSLayoutConstraint.activate([logo.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50),
+        NSLayoutConstraint.activate([logo.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -100),
         logo.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         logo.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.3),
         logo.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.3),
@@ -205,6 +206,12 @@ class SignUpViewController: UIViewController {
             return
         }
         
+        if passwordTextField?.text?.count ?? 0 < 6 {
+            print("Password must have at least 6 characters")
+            validacionLabel?.text = "Password must have at least 6 characters"
+            return
+        }
+        
         if isValidEmail(emailID: emailTextField?.text ?? "") {
             validatePass()
             } else {
@@ -212,17 +219,26 @@ class SignUpViewController: UIViewController {
                 validacionLabel?.text = "Write a valid email"
             }
         }
+    
+    
     func validatePass() {
-        guard let passwordTextField = passwordTextField, let repeatPasswordTextField = repeatPasswordTextField else {
+        guard let passwordTextField = passwordTextField, let repeatPasswordTextField = repeatPasswordTextField, let email = emailTextField?.text, let password = passwordTextField.text  else {
             return
         }
 
         if passwordTextField.text == repeatPasswordTextField.text {
-            print("Valid Email")
-                print("Go to login")
-                let goLogin = SignInViewController()
-                goLogin.modalPresentationStyle = .fullScreen
-                present(goLogin, animated: true, completion: nil)
+            
+            Auth.auth().createUser(withEmail: email, password: password) { authResult, error in
+                if let e = error {
+                        print(e)
+                } else {
+                    print("Valid Email")
+                        print("Go to login")
+                        let goLogin = SignInViewController()
+                        goLogin.modalPresentationStyle = .fullScreen
+                        self.present(goLogin, animated: true, completion: nil)
+                    }
+                }
         }else {
             print("Passwords don't match")
             validacionLabel?.text = "Match the passwords"

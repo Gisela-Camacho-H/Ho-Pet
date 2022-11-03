@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SignInViewController: UIViewController {
     
@@ -44,7 +45,7 @@ class SignInViewController: UIViewController {
         
         // App name
         var titleLogin = UILabel(frame: .zero)
-        titleLogin = UILabel(frame: CGRect(x: 0, y: 220 , width: Constants.width, height: 50))
+        titleLogin = UILabel(frame: CGRect(x: 0, y: 230 , width: Constants.width, height: 50))
         titleLogin.text = "Login"
         titleLogin.textColor = UIColor.darkPink
         titleLogin.applyTitleFont()
@@ -77,7 +78,7 @@ class SignInViewController: UIViewController {
         //MARK: - textField Stack
         let textFieldStack = UIStackView(frame: .zero)
         textFieldStack.axis = .vertical
-        textFieldStack.spacing = 90.0
+        textFieldStack.spacing = 50.0
         textFieldStack.alignment = .fill
         textFieldStack.distribution = .fillEqually
         
@@ -97,17 +98,20 @@ class SignInViewController: UIViewController {
         
         // MARK: - go to Sign Up
         let accountLabel = UILabel()
-        accountLabel.text = "Don't have an account? "
+        accountLabel.text = "  Don't have an account? "
         accountLabel.apply16Font()
         accountLabel.textColor = UIColor.backgroundBlack
+        accountLabel.backgroundColor = UIColor.backgroundpinkblur
         self.accountLabel = accountLabel
         self.view.addSubview(accountLabel)
         
         let signUpButton = UIButton()
         signUpButton.setTitleColor(UIColor.darkPink, for: .normal)
-        signUpButton.setTitle("SIGN UP", for: .normal)
+        signUpButton.setTitle("SIGN UP  ", for: .normal)
         signUpButton.addTarget(self, action: #selector(GoToSignUp), for: .touchUpInside)
         signUpButton.titleLabel?.apply16Font()
+        signUpButton.backgroundColor = UIColor.backgroundpinkblur
+        signUpButton.layer.cornerRadius = 5
         self.signUpButton = signUpButton
         self.view.addSubview(signUpButton)
 //MARK: - cuentaStackView
@@ -126,7 +130,7 @@ class SignInViewController: UIViewController {
         accounStackView.translatesAutoresizingMaskIntoConstraints = false
         
         cuentaArray.forEach {element in
-            element.heightAnchor.constraint(equalToConstant: 20).isActive = true
+            element.heightAnchor.constraint(equalToConstant: 60).isActive = true
         }
     }
     
@@ -142,7 +146,7 @@ class SignInViewController: UIViewController {
         //MARK: - textFielf Stack
                 
         NSLayoutConstraint.activate([
-            textFieldStack.topAnchor.constraint(equalTo: titleLogin.bottomAnchor, constant:  80),
+            textFieldStack.topAnchor.constraint(equalTo: titleLogin.bottomAnchor, constant:  30),
             textFieldStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             textFieldStack.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier:0.8)
                 ])
@@ -158,13 +162,13 @@ class SignInViewController: UIViewController {
         signInButton.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.15),
         ])
         
-        NSLayoutConstraint.activate([accounStackView.bottomAnchor.constraint(equalTo: signInButton.bottomAnchor, constant: 40),
+        NSLayoutConstraint.activate([accounStackView.bottomAnchor.constraint(equalTo: signInButton.bottomAnchor, constant: 60),
                                      accounStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
     
     @objc func onloginButtonTap(){
-        
+        guard let email = emailTextField?.text, let password = passwordTextField?.text else { return }
         if emailTextField?.text == "" {
                 print("Empty Email")
                 validacionLabel?.text = "Write a email"
@@ -176,12 +180,18 @@ class SignInViewController: UIViewController {
             validacionLabel?.text = "Write your password"
             return
         } else {
-        
-        print("Go to Home")
-        let goHome = HomeViewController()
-        let navVC = UINavigationController(rootViewController: goHome)
-        navVC.modalPresentationStyle = .fullScreen
-        present(navVC, animated: true, completion: nil)
+            Auth.auth().signIn(withEmail: email, password: password) { [weak self] authResult, error in
+                if let e = error {
+                    print(e)
+                } else {
+                    print("Go to Home")
+                    let goHome = TabBarViewController()
+                    let navVC = UINavigationController(rootViewController: goHome)
+                    navVC.modalPresentationStyle = .fullScreen
+                    self?.present(navVC, animated: true, completion: nil)
+                }
+            }
+
         }
     }
     

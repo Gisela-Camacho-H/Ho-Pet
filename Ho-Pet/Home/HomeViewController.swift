@@ -6,183 +6,133 @@
 //
 
 import UIKit
+import Firebase
 
 class HomeViewController: UIViewController {
     
     private weak var titleCollection1: UIView.collectionViewTitle?
-    private weak var titleCollection2: UIView.collectionViewTitle?
-    var data: DogModel?
-    var akitaCollectionView: UICollectionView?
-    var beagleCollectionView: UICollectionView?
+    var homeCollectionView: UICollectionView?
+    private let viewModel = HomeViewModel()
+    private weak var logo: UIImageView?
+    private weak var logout: UIButton?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initUI()
         setConstrains()
+        viewModel.getImage()
+        homeCollectionView?.reloadData()
+
     }
+    
     func initUI() {
-        view.backgroundColor = .white
-        title = "Welcome"
+        view.backgroundColor = UIColor.backgroundpink
+        title = "Home"
+        
+        let logo = UIImageView(frame: .zero)
+        logo.translatesAutoresizingMaskIntoConstraints = false
+        logo.image = UIImage(named: "logo")
+        logo.layer.cornerRadius = Constants.width/10
+        logo.clipsToBounds = true
+        self.view.addSubview(logo)
+        self.logo = logo
+        
+        let logout = UIButton(frame: .zero)
+        logout.translatesAutoresizingMaskIntoConstraints = false
+        logout.setImage(UIImage(systemName: "arrowshape.turn.up.left.circle"), for: UIControl.State.normal)
+        logout.tintColor = .white
+        logout.contentVerticalAlignment = .fill
+        logout.contentHorizontalAlignment = .fill
+        logout.backgroundColor = .darkPink
+        logout.addTarget(self, action: #selector(Logout), for: .touchUpInside)
+        logout.layer.cornerRadius = Constants.width/20
+        logout.clipsToBounds = true
+        self.view.addSubview(logout)
+        self.logout = logout
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(systemName: "arrowshape.turn.up.backward.circle")?.withTintColor(.black, renderingMode: .alwaysOriginal), style: .plain, target: self, action: #selector(dismissSelf))
+
         
-        // collectionView name
-        let titleCollection1 = UIView.collectionViewTitle(frame: CGRect(x: 0, y: 100 , width: Constants.width, height: 40))
-        titleCollection1.text = "        Akita"
-        self.view.addSubview(titleCollection1)
-        self.titleCollection1 = titleCollection1
-        
-        let titleCollection2 = UIView.collectionViewTitle(frame: .zero)
-        titleCollection2.text = "        Beagle"
-        self.view.addSubview(titleCollection2)
-        titleCollection2.translatesAutoresizingMaskIntoConstraints = false
-        self.titleCollection2 = titleCollection2
-        
-        akitaCollectionView = {
+        homeCollectionView = {
             let layout = UICollectionViewFlowLayout()
             layout.scrollDirection = .horizontal
             layout.minimumLineSpacing = Constants.width/15
             layout.minimumInteritemSpacing = Constants.width/10
             
             let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
-            collection.register(DogCollectionView.self, forCellWithReuseIdentifier: "cell")
+            collection.register(HomeCollectionView.self, forCellWithReuseIdentifier: "cell")
             collection.isPagingEnabled = true
             collection.translatesAutoresizingMaskIntoConstraints = false
-            collection.backgroundColor = .white
+            collection.backgroundColor = UIColor.backgroundpink
             collection.showsVerticalScrollIndicator = true
             collection.showsHorizontalScrollIndicator = true
             return collection
         }()
-        
-        
-        beagleCollectionView = {
-            let layout = UICollectionViewFlowLayout()
-            layout.scrollDirection = .horizontal
-            layout.minimumLineSpacing = Constants.width/15
-            layout.minimumInteritemSpacing = Constants.width/10
-            
-            let collection = UICollectionView(frame: .zero, collectionViewLayout: layout)
-            collection.register(DogCollectionView.self, forCellWithReuseIdentifier: "cell")
-            collection.isPagingEnabled = true
-            collection.translatesAutoresizingMaskIntoConstraints = false
-            collection.backgroundColor = .white
-            collection.showsVerticalScrollIndicator = true
-            collection.showsHorizontalScrollIndicator = true
-            return collection
-        }()
-        
-        fetchingAPIDogs(URL: "https://dog.ceo/api/breed/akita/images") { result in
-            self.data = result
-            DispatchQueue.main.async{
-                self.akitaCollectionView?.reloadData()
-            }
-        }
-        
-        fetchingAPIDogs(URL: "https://dog.ceo/api/breed/beagle/images") { result in
-            self.data = result
-            DispatchQueue.main.async{
-                self.beagleCollectionView?.reloadData()
-            }
-        }
+    
     }
         
         func setConstrains() {
-            guard let akitaCollectionView = akitaCollectionView, let titleCollection1 = titleCollection1,
-                  let titleCollection2 = titleCollection2, let beagleCollectionView = beagleCollectionView else { return }
-            akitaCollectionView.delegate = self
-            akitaCollectionView.dataSource = self
-            view.addSubview(akitaCollectionView)
-            akitaCollectionView.translatesAutoresizingMaskIntoConstraints = false
+            guard let homeCollectionView = homeCollectionView, let logo = logo, let logout = logout else { return }
+            homeCollectionView.delegate = self
+            homeCollectionView.dataSource = self
+            view.addSubview(homeCollectionView)
+            homeCollectionView.translatesAutoresizingMaskIntoConstraints = false
             
-            beagleCollectionView.delegate = self
-            beagleCollectionView.dataSource = self
-            view.addSubview(beagleCollectionView)
-            beagleCollectionView.translatesAutoresizingMaskIntoConstraints = false
-        
-            NSLayoutConstraint.activate([akitaCollectionView.topAnchor.constraint(equalTo: titleCollection1.bottomAnchor, constant: 10),
-                                     akitaCollectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                                     akitaCollectionView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
-                                     akitaCollectionView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.35)])
+            NSLayoutConstraint.activate([logo.topAnchor.constraint(equalTo: view.topAnchor, constant: 60),
+            logo.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            logo.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.2),
+            logo.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.2),
+            ])
             
+            NSLayoutConstraint.activate([homeCollectionView.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 30),
+                                     homeCollectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+                                     homeCollectionView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
+                                     homeCollectionView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.35)])
             
-           
-            NSLayoutConstraint.activate([titleCollection2.topAnchor.constraint(equalTo: akitaCollectionView.bottomAnchor, constant: 10),
-                                         titleCollection2.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                                         titleCollection2.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 1.0),
-                                         titleCollection2.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.1)])
-            
-            
-            NSLayoutConstraint.activate([
-                                    beagleCollectionView.topAnchor.constraint(equalTo: titleCollection2.bottomAnchor, constant: 10),
-                                    beagleCollectionView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-                                    beagleCollectionView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
-                                    beagleCollectionView.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.35)])
+            NSLayoutConstraint.activate([logout.rightAnchor.constraint(equalTo: view.rightAnchor, constant: -10),
+                                         logout.topAnchor.constraint(equalTo: view.topAnchor, constant: 70),
+                                         logout.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.1),
+                                         logout.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.1),
+            ])
             
         }
-    
-    
-
-    
-    func fetchingAPIDogs(URL Url: String, completion: @escaping (DogModel) -> Void) {
-        
-        let url =  URL(string: Url)
-        let session = URLSession.shared
-        let dataTask = session.dataTask(with: url!) { data, response, error  in
-            do {
-                let fetchingData = try JSONDecoder().decode(DogModel.self, from: data!)
-                    completion(fetchingData)
-                }catch (let error){
-                    print(error)
-            }
-        }
-        dataTask.resume()
-    }
 
     @objc func dismissSelf(){
         dismiss(animated: true, completion: nil)
     }
     
+    @objc func Logout() {
+    do {
+      try Auth.auth().signOut()
+        let goSignIn = SignInViewController()
+        goSignIn.modalPresentationStyle = .fullScreen
+        present(goSignIn, animated: true, completion: nil)
+    } catch let signOutError as NSError {
+      print("Error signing out: %@", signOutError)
+        }
+    }
 }
 //MARK: - UICollectionDelegate && UICollectionDataSourse
 
 extension HomeViewController : UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return data?.message.count ?? 0
+        return viewModel.imageSource?.catego?[section].home?.count ?? 0
+    }
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell{
-        let cell = akitaCollectionView?.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! DogCollectionView
-        if let apiData = data?.message[indexPath.row] {
-        let url = URL(string: apiData)
-            cell.imageDog.downloaded(from: url!, contentMode: .scaleToFill)
-        }
-        return cell
+        let cell = homeCollectionView?.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! HomeCollectionView
+        let producto = viewModel.imageSource?.catego?[indexPath.section].home?[indexPath.item]
+        cell.setData( home : producto!)
+        
+    return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize{
         
-        return CGSize(width: Constants.width/4 - 20, height: Constants.height / 5 - 50)
-    }
-}
-
-
-extension UIImageView {
-    func downloaded(from url: URL, contentMode mode: ContentMode = .scaleAspectFit) {
-        contentMode = mode
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            guard
-                let httpURLResponse = response as? HTTPURLResponse, httpURLResponse.statusCode == 200,
-                let mimeType = response?.mimeType, mimeType.hasPrefix("image"),
-                let data = data, error == nil,
-                let image = UIImage(data: data)
-                else { return }
-            DispatchQueue.main.async { [weak self] in
-                self?.image = image
-            }
-        }.resume()
-    }
-    func downloaded(from link: String, contentMode mode: ContentMode = .scaleAspectFit) {
-        guard let url = URL(string: link) else { return }
-        downloaded(from: url, contentMode: mode)
+        return CGSize(width: Constants.width/5 - 10, height: Constants.height / 6 - 30)
     }
 }
