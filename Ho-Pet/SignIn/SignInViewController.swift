@@ -20,12 +20,32 @@ class SignInViewController: UIViewController {
     private weak var accountLabel: UILabel?
     private weak var signUpButton: UIButton?
     private weak var accounStackView: UIStackView?
+    private var passwordCenterXAnchor: NSLayoutConstraint?
+    private var userCenterXAnchor: NSLayoutConstraint?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         initUI()
         setContrains()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        guard let emailTextField: UITextField = emailTextField,
+        let passwordTextField: UITextField = passwordTextField else { return }
+
+        UIView.animate(withDuration: 1.0, delay: 0.4, options: [.curveEaseIn], animations: {
+        self.userCenterXAnchor?.isActive = false
+        self.userCenterXAnchor = emailTextField.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
+        self.userCenterXAnchor?.isActive = true
+
+        self.passwordCenterXAnchor?.isActive = false
+        self.passwordCenterXAnchor = passwordTextField.centerXAnchor.constraint(equalTo: self.view.centerXAnchor)
+        self.passwordCenterXAnchor?.isActive = true
+
+        self.view.layoutIfNeeded()
+        }, completion: nil)
+      }
     
     func initUI() {
         //Background
@@ -76,6 +96,7 @@ class SignInViewController: UIViewController {
         self.view.addSubview(passwordTextField)
         
         //MARK: - textField Stack
+        /*
         let textFieldStack = UIStackView(frame: .zero)
         textFieldStack.axis = .vertical
         textFieldStack.spacing = 50.0
@@ -89,6 +110,7 @@ class SignInViewController: UIViewController {
         textFieldArray.forEach {button in
             textFieldStack.addArrangedSubview(button)
             }
+         */
         
         let validacionLabel = UIView.validacionLabel()
         self.validacionLabel = validacionLabel
@@ -135,7 +157,7 @@ class SignInViewController: UIViewController {
     }
     
     func setContrains() {
-        guard let logo = logo , let titleLogin = titleLogin, let textFieldStack = textFieldStack, let signInButton = signInButton, let validacionLabel = validacionLabel, let accounStackView = accounStackView else  { return }
+        guard let logo = logo , let titleLogin = titleLogin, let signInButton = signInButton, let validacionLabel = validacionLabel, let accounStackView = accounStackView, let emailTextField = emailTextField, let passwordTextField = passwordTextField else  { return }
         
         NSLayoutConstraint.activate([logo.bottomAnchor.constraint(equalTo: titleLogin.bottomAnchor, constant: -60),
         logo.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -143,15 +165,33 @@ class SignInViewController: UIViewController {
         logo.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.2),
         ])
         
-        //MARK: - textFielf Stack
-                
+        //MARK: - textField
+        
         NSLayoutConstraint.activate([
+          emailTextField.heightAnchor.constraint(equalToConstant: 50),
+          passwordTextField.heightAnchor.constraint(equalToConstant: 50),
+          emailTextField.topAnchor.constraint(equalTo: view.topAnchor, constant:  400),
+          passwordTextField.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 40),
+          emailTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8),
+          passwordTextField.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8)
+        ])
+
+        userCenterXAnchor = emailTextField.centerXAnchor.constraint(
+              equalTo: view.centerXAnchor, constant: -view.bounds.width)
+        userCenterXAnchor?.isActive = true
+
+        passwordCenterXAnchor = passwordTextField.centerXAnchor.constraint(
+              equalTo: view.centerXAnchor, constant: view.bounds.width)
+        passwordCenterXAnchor?.isActive = true
+                
+        /*NSLayoutConstraint.activate([
             textFieldStack.topAnchor.constraint(equalTo: titleLogin.bottomAnchor, constant:  30),
             textFieldStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             textFieldStack.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier:0.8)
                 ])
+         */
         
-        NSLayoutConstraint.activate([validacionLabel.topAnchor.constraint(equalTo: textFieldStack.bottomAnchor, constant: 30),
+        NSLayoutConstraint.activate([validacionLabel.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 30),
         validacionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         validacionLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: Constants.widthProportion)
         ])
@@ -170,7 +210,6 @@ class SignInViewController: UIViewController {
     @objc func onloginButtonTap(){
         guard let email = emailTextField?.text, let password = passwordTextField?.text else { return }
         if emailTextField?.text == "" {
-                print("Empty Email")
                 validacionLabel?.text = "Write a email"
                 return
             }
@@ -184,7 +223,13 @@ class SignInViewController: UIViewController {
                 if let e = error {
                     print(e)
                 } else {
-                    print("Go to Home")
+                    do {
+                        try KeychainManager.save(
+                            account: self?.emailTextField?.text ?? "",
+                            password: self?.passwordTextField?.text ?? "")
+                    } catch {
+                        print("error")
+                    }
                     let goHome = TabBarViewController()
                     let navVC = UINavigationController(rootViewController: goHome)
                     navVC.modalPresentationStyle = .fullScreen
@@ -196,7 +241,6 @@ class SignInViewController: UIViewController {
     }
     
     @objc func GoToSignUp() {
-        print("Go to Sign Up")
         let goSignUp = SignUpViewController()
         goSignUp.modalPresentationStyle = .fullScreen
         present(goSignUp, animated: true, completion: nil)

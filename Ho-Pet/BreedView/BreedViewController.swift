@@ -119,6 +119,9 @@ class BreedViewController: UIViewController {
         germanshepherdCollectionView = createCollectionView()
         huskyCollectionView = createCollectionView()
         
+        
+
+        
         fetchingAPIDogs(URL: "https://dog.ceo/api/breed/akita/images") { result in
             self.dataAkita = result
             DispatchQueue.main.async{
@@ -249,6 +252,21 @@ class BreedViewController: UIViewController {
         let dataTask = session.dataTask(with: url!) { data, response, error  in
             do {
                 let fetchingData = try JSONDecoder().decode(DogModel.self, from: data!)
+                    completion(fetchingData)
+                }catch (let error){
+                    print(error)
+            }
+        }
+        dataTask.resume()
+    }
+    
+    func fetchingAPIData<T: Decodable>(URL Url: String, completion: @escaping (T) -> Void) {
+        
+        let url =  URL(string: Url)
+        let session = URLSession.shared
+        let dataTask = session.dataTask(with: url!) { data, response, error  in
+            do {
+                let fetchingData = try JSONDecoder().decode(T.self, from: data!)
                     completion(fetchingData)
                 }catch (let error){
                     print(error)

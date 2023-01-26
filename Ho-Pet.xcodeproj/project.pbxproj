@@ -31,6 +31,7 @@
 		5689E8B128D8D1610071A774 /* HomeObjectCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5689E8B028D8D1610071A774 /* HomeObjectCollection.swift */; };
 		5689E8B328D8D1FE0071A774 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5689E8B228D8D1FE0071A774 /* HomeViewModel.swift */; };
 		56CFD61A28C8FEBB003F7E12 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CFD61928C8FEBB003F7E12 /* Model.swift */; };
+		56D5B0AC296C65D3000BE7B6 /* keychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D5B0AB296C65D3000BE7B6 /* keychainManager.swift */; };
 		56EFFC8228BFA9A900F6E782 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56EFFC8128BFA9A900F6E782 /* HomeViewController.swift */; };
 		56F06657290AF0250004EBFF /* HO-Pet-DB.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 56F06655290AF0250004EBFF /* HO-Pet-DB.xcdatamodeld */; };
 		59651A2C4DC54E96587BB69C /* Pods_Ho_Pet.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 364AB1D3DB22B6A09ECEAF66 /* Pods_Ho_Pet.framework */; };
@@ -65,6 +66,7 @@
 		5689E8B028D8D1610071A774 /* HomeObjectCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeObjectCollection.swift; sourceTree = "<group>"; };
 		5689E8B228D8D1FE0071A774 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		56CFD61928C8FEBB003F7E12 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		56D5B0AB296C65D3000BE7B6 /* keychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keychainManager.swift; sourceTree = "<group>"; };
 		56EFFC8128BFA9A900F6E782 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		56F06656290AF0250004EBFF /* HO-Pet-DB.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "HO-Pet-DB.xcdatamodel"; sourceTree = "<group>"; };
 		B2B5ACEABB9E2AAC36089665 /* Pods-Ho-Pet.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ho-Pet.release.xcconfig"; path = "Target Support Files/Pods-Ho-Pet/Pods-Ho-Pet.release.xcconfig"; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				56673D6528BEAFC4006B81EF /* SignInViewController.swift */,
+				56D5B0AB296C65D3000BE7B6 /* keychainManager.swift */,
 			);
 			path = SignIn;
 			sourceTree = "<group>";
@@ -368,6 +371,7 @@
 				56673D6828BEAFD4006B81EF /* SignUpViewController.swift in Sources */,
 				5687A8EC28D8CDB400C6924B /* DogCollectionView.swift in Sources */,
 				56673D5F28BEA1EC006B81EF /* UILabel++.swift in Sources */,
+				56D5B0AC296C65D3000BE7B6 /* keychainManager.swift in Sources */,
 				56673D5A28BE6C2E006B81EF /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

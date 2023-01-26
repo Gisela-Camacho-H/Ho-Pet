@@ -7,6 +7,7 @@
 
 import UIKit
 import Firebase
+import WebKit
 
 class HomeViewController: UIViewController {
     
@@ -15,6 +16,7 @@ class HomeViewController: UIViewController {
     private let viewModel = HomeViewModel()
     private weak var logo: UIImageView?
     private weak var logout: UIButton?
+    private weak var video: WKWebView?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +24,7 @@ class HomeViewController: UIViewController {
         setConstrains()
         viewModel.getImage()
         homeCollectionView?.reloadData()
+        loadYoutube()
 
     }
     
@@ -68,11 +71,17 @@ class HomeViewController: UIViewController {
             collection.showsHorizontalScrollIndicator = true
             return collection
         }()
+        
+        let video = WKWebView(frame: .zero)
+        video.translatesAutoresizingMaskIntoConstraints = false
+        self.view.addSubview(video)
+        self.video = video
+        
     
     }
         
         func setConstrains() {
-            guard let homeCollectionView = homeCollectionView, let logo = logo, let logout = logout else { return }
+            guard let homeCollectionView = homeCollectionView, let logo = logo, let logout = logout, let video = video else { return }
             homeCollectionView.delegate = self
             homeCollectionView.dataSource = self
             view.addSubview(homeCollectionView)
@@ -95,8 +104,22 @@ class HomeViewController: UIViewController {
                                          logout.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.1),
             ])
             
+            NSLayoutConstraint.activate([video.topAnchor.constraint(equalTo: homeCollectionView.bottomAnchor, constant: 50),
+            video.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            video.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.7),
+            video.heightAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
+            ])
+            
         }
+    
+    func loadYoutube() {
+        guard
+            let youtubeURL = URL(string: "https://www.youtube.com/embed/nD05oqgWgJU")
+            else { return }
+        video?.load( URLRequest(url: youtubeURL) )
+    }
 
+    
     @objc func dismissSelf(){
         dismiss(animated: true, completion: nil)
     }
@@ -107,6 +130,7 @@ class HomeViewController: UIViewController {
         let goSignIn = SignInViewController()
         goSignIn.modalPresentationStyle = .fullScreen
         present(goSignIn, animated: true, completion: nil)
+        print("logout")
     } catch let signOutError as NSError {
       print("Error signing out: %@", signOutError)
         }

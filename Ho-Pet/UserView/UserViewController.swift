@@ -31,7 +31,7 @@ class UserViewController: UIViewController, UIImagePickerControllerDelegate & UI
         let imageProfile = UIImageView(frame: .zero)
         imageProfile.translatesAutoresizingMaskIntoConstraints = false
         imageProfile.image = UIImage(systemName: "person.circle.fill")
-        imageProfile.tintColor = .backgroundBlack
+        imageProfile.tintColor = .gray
         imageProfile.backgroundColor = .white
         imageProfile.layer.cornerRadius = Constants.width/4
         imageProfile.clipsToBounds = true
@@ -44,7 +44,7 @@ class UserViewController: UIViewController, UIImagePickerControllerDelegate & UI
         buttonUpdateImage.tintColor = .white
         buttonUpdateImage.contentVerticalAlignment = .fill
         buttonUpdateImage.contentHorizontalAlignment = .fill
-        buttonUpdateImage.backgroundColor = .darkPink
+        buttonUpdateImage.backgroundColor = .backgroundBlack
         buttonUpdateImage.addTarget(self, action: #selector(updatePhoto), for: .touchUpInside)
         buttonUpdateImage.layer.cornerRadius = Constants.width/10
         buttonUpdateImage.clipsToBounds = true

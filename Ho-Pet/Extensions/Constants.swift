@@ -19,3 +19,12 @@ struct Constants {
     static var width = UIScreen.main.bounds.width
     static var height = UIScreen.main.bounds.height
 }
+
+struct WelcomeConstants {
+    static let signIn = "Sign In"
+    static let signUp = "Sign Up"
+    static let appName = "Ho - Pet"
+    static var cornerRadiusLogo = UIScreen.main.bounds.width/2.5
+    static var heightElements: CGFloat = 50
+    static var multiplierElements: CGFloat = 0.8
+}
