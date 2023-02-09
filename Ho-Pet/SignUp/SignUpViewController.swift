@@ -233,14 +233,14 @@ class SignUpViewController: UIViewController {
                         print(e)
                 } else {
                     print("Valid Email")
-                        print("Go to login")
+                    print(ConfigValues.get().goToLogin)
                         let goLogin = SignInViewController()
                         goLogin.modalPresentationStyle = .fullScreen
                         self.present(goLogin, animated: true, completion: nil)
                     }
                 }
         }else {
-            print("Passwords don't match")
+            print(ConfigValues.get().PasswordsDontMatch)
             validacionLabel?.text = "Match the passwords"
         }
     }

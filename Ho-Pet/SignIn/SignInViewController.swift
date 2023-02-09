@@ -29,6 +29,22 @@ class SignInViewController: UIViewController {
         setContrains()
     }
     
+    func getPassword() -> String{
+        guard let data = KeychainManager.getPassWordKeychain(service: "hopet", acc: .password) else {
+            return ""
+        }
+        let password = String(decoding: data, as: UTF8.self)
+        return password
+    }
+    
+    func getEmail() -> String {
+        guard let data = KeychainManager.getEmailKeychain(key: "email") else {
+            return ""
+        }
+        let email = String(decoding: data, as: UTF8.self)
+        return email
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         guard let emailTextField: UITextField = emailTextField,
@@ -84,7 +100,8 @@ class SignInViewController: UIViewController {
         //MARK: - Email TextField
         let emailTextField = UIView.mainTextField()
         emailTextField.attributedPlaceholder = NSAttributedString(
-            string: "Email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.backgroundpink])
+        string: "Email", attributes: [NSAttributedString.Key.foregroundColor: UIColor.backgroundpink])
+        emailTextField.text = getEmail()
         self.emailTextField = emailTextField
         self.view.addSubview(emailTextField)
         
@@ -93,24 +110,8 @@ class SignInViewController: UIViewController {
             string: "Password", attributes: [NSAttributedString.Key.foregroundColor: UIColor.backgroundpink])
         self.passwordTextField = passwordTextField
         passwordTextField.isSecureTextEntry = true
+        passwordTextField.text = getPassword()
         self.view.addSubview(passwordTextField)
-        
-        //MARK: - textField Stack
-        /*
-        let textFieldStack = UIStackView(frame: .zero)
-        textFieldStack.axis = .vertical
-        textFieldStack.spacing = 50.0
-        textFieldStack.alignment = .fill
-        textFieldStack.distribution = .fillEqually
-        
-        view.addSubview(textFieldStack)
-        self.textFieldStack = textFieldStack
-        textFieldStack.translatesAutoresizingMaskIntoConstraints = false
-        let textFieldArray = [emailTextField, passwordTextField]
-        textFieldArray.forEach {button in
-            textFieldStack.addArrangedSubview(button)
-            }
-         */
         
         let validacionLabel = UIView.validacionLabel()
         self.validacionLabel = validacionLabel
@@ -184,13 +185,6 @@ class SignInViewController: UIViewController {
               equalTo: view.centerXAnchor, constant: view.bounds.width)
         passwordCenterXAnchor?.isActive = true
                 
-        /*NSLayoutConstraint.activate([
-            textFieldStack.topAnchor.constraint(equalTo: titleLogin.bottomAnchor, constant:  30),
-            textFieldStack.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            textFieldStack.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier:0.8)
-                ])
-         */
-        
         NSLayoutConstraint.activate([validacionLabel.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: 30),
         validacionLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         validacionLabel.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: Constants.widthProportion)
@@ -215,7 +209,7 @@ class SignInViewController: UIViewController {
             }
         
         if passwordTextField?.text == "" {
-            print("Empty password")
+            print(ConfigValues.get().emptyPassword)
             validacionLabel?.text = "Write your password"
             return
         } else {
@@ -224,13 +218,20 @@ class SignInViewController: UIViewController {
                     print(e)
                 } else {
                     do {
-                        try KeychainManager.save(
-                            account: self?.emailTextField?.text ?? "",
-                            password: self?.passwordTextField?.text ?? "")
+                        try KeychainManager.savePassword(
+                            service: "hopet",
+                            acc: .password,
+                            password: self?.passwordTextField?.text?.data(using: .utf8) ?? Data())
+                        try KeychainManager.saveEmail(
+                            key: .email,
+                            account:  self?.emailTextField?.text?.data(using: .utf8) ?? Data())
                     } catch {
                         print("error")
                     }
+                    
+                    
                     let goHome = TabBarViewController()
+                    print(ConfigValues.get().login)
                     let navVC = UINavigationController(rootViewController: goHome)
                     navVC.modalPresentationStyle = .fullScreen
                     self?.present(navVC, animated: true, completion: nil)

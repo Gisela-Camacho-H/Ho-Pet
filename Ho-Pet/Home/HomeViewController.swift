@@ -130,6 +130,7 @@ class HomeViewController: UIViewController {
         let goSignIn = SignInViewController()
         goSignIn.modalPresentationStyle = .fullScreen
         present(goSignIn, animated: true, completion: nil)
+        KeychainManager.deletePassword(service: "hopet", acc: .password)
         print("logout")
     } catch let signOutError as NSError {
       print("Error signing out: %@", signOutError)

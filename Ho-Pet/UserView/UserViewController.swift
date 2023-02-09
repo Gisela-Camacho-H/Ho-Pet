@@ -121,7 +121,7 @@ class UserViewController: UIViewController, UIImagePickerControllerDelegate & UI
     }
     
     @objc func updatePhoto(){
-        print("updating photo")
+        print(ConfigValues.get().updatePhoto)
         if UIImagePickerController.isSourceTypeAvailable(.photoLibrary){
             imagePicker.allowsEditing = false
             imagePicker.sourceType = .photoLibrary

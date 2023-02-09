@@ -41,12 +41,15 @@ class TabBarViewController: UIViewController, UITabBarControllerDelegate {
         thirdViewController.title = "User"
         thirdViewController.tabBarItem.image = UIImage(systemName: "person.fill")
         
-        tabBarCnt.viewControllers = [firstViewController, secondViewController, thirdViewController]
+        let fourthViewController = SearchViewController()
+        fourthViewController.title = "Search"
+        fourthViewController.tabBarItem.image = UIImage(systemName: "magnifyingglass")
+        
+        tabBarCnt.viewControllers = [firstViewController, secondViewController, thirdViewController, fourthViewController]
 
         self.view.addSubview(tabBarCnt.view)
     }
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-        print("tabBar controller \(tabBarController.selectedIndex)")
     }
     
 

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Config</key>
+	<dict/>
+	<key>goToLogin</key>
+	<string>Go To Login</string>
+	<key>PasswordsDontMatch</key>
+	<string>Passwords Dont Match</string>
+	<key>emptyPassword</key>
+	<string>Empty Password</string>
+	<key>updatePhoto</key>
+	<string>Updating Photo</string>
+	<key>login</key>
+	<string>Success Login</string>
+</dict>
+</plist>

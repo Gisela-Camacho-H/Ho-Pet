@@ -13,6 +13,8 @@
 		56373AD9290B37CF00954EC4 /* PhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56373AD8290B37CF00954EC4 /* PhotoViewModel.swift */; };
 		564F3A7329003DD500E9B1A8 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564F3A7229003DD500E9B1A8 /* TabBarViewController.swift */; };
 		564F3A762900429D00E9B1A8 /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 564F3A752900429D00E9B1A8 /* UserViewController.swift */; };
+		565354F1298AF86000C0EAAD /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 565354F0298AF86000C0EAAD /* Config.plist */; };
+		565354F3298AF9F000C0EAAD /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 565354F2298AF9F000C0EAAD /* Config.swift */; };
 		56673D4628BE676A006B81EF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56673D4528BE676A006B81EF /* AppDelegate.swift */; };
 		56673D4828BE676A006B81EF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56673D4728BE676A006B81EF /* SceneDelegate.swift */; };
 		56673D4A28BE676A006B81EF /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56673D4928BE676A006B81EF /* WelcomeViewController.swift */; };
@@ -30,7 +32,10 @@
 		5689E8AF28D8CF930071A774 /* HomeCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5689E8AE28D8CF930071A774 /* HomeCollectionView.swift */; };
 		5689E8B128D8D1610071A774 /* HomeObjectCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5689E8B028D8D1610071A774 /* HomeObjectCollection.swift */; };
 		5689E8B328D8D1FE0071A774 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5689E8B228D8D1FE0071A774 /* HomeViewModel.swift */; };
-		56CFD61A28C8FEBB003F7E12 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CFD61928C8FEBB003F7E12 /* Model.swift */; };
+		56BC9239299556A400F2DEF4 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BC9238299556A400F2DEF4 /* SearchViewController.swift */; };
+		56BC923B2995582B00F2DEF4 /* AllBreedModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BC923A2995582B00F2DEF4 /* AllBreedModel.swift */; };
+		56BC923D2995645600F2DEF4 /* breedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56BC923C2995645600F2DEF4 /* breedCell.swift */; };
+		56CFD61A28C8FEBB003F7E12 /* DogModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56CFD61928C8FEBB003F7E12 /* DogModel.swift */; };
 		56D5B0AC296C65D3000BE7B6 /* keychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56D5B0AB296C65D3000BE7B6 /* keychainManager.swift */; };
 		56EFFC8228BFA9A900F6E782 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56EFFC8128BFA9A900F6E782 /* HomeViewController.swift */; };
 		56F06657290AF0250004EBFF /* HO-Pet-DB.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 56F06655290AF0250004EBFF /* HO-Pet-DB.xcdatamodeld */; };
@@ -46,6 +51,8 @@
 		56373AD8290B37CF00954EC4 /* PhotoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewModel.swift; sourceTree = "<group>"; };
 		564F3A7229003DD500E9B1A8 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		564F3A752900429D00E9B1A8 /* UserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
+		565354F0298AF86000C0EAAD /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
+		565354F2298AF9F000C0EAAD /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		56673D4228BE676A006B81EF /* Ho-Pet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ho-Pet.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		56673D4528BE676A006B81EF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		56673D4728BE676A006B81EF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -65,7 +72,10 @@
 		5689E8AE28D8CF930071A774 /* HomeCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeCollectionView.swift; sourceTree = "<group>"; };
 		5689E8B028D8D1610071A774 /* HomeObjectCollection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeObjectCollection.swift; sourceTree = "<group>"; };
 		5689E8B228D8D1FE0071A774 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
-		56CFD61928C8FEBB003F7E12 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		56BC9238299556A400F2DEF4 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		56BC923A2995582B00F2DEF4 /* AllBreedModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllBreedModel.swift; sourceTree = "<group>"; };
+		56BC923C2995645600F2DEF4 /* breedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = breedCell.swift; sourceTree = "<group>"; };
+		56CFD61928C8FEBB003F7E12 /* DogModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogModel.swift; sourceTree = "<group>"; };
 		56D5B0AB296C65D3000BE7B6 /* keychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keychainManager.swift; sourceTree = "<group>"; };
 		56EFFC8128BFA9A900F6E782 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		56F06656290AF0250004EBFF /* HO-Pet-DB.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "HO-Pet-DB.xcdatamodel"; sourceTree = "<group>"; };
@@ -131,6 +141,7 @@
 		56673D4428BE676A006B81EF /* Ho-Pet */ = {
 			isa = PBXGroup;
 			children = (
+				56BC92372995568800F2DEF4 /* SearchView */,
 				56373AD3290B27A200954EC4 /* CoreData */,
 				564F3A742900426F00E9B1A8 /* UserView */,
 				564F3A7129003DC400E9B1A8 /* TabView */,
@@ -142,10 +153,12 @@
 				56673D6228BEAE38006B81EF /* Welcome */,
 				56673D5B28BEA1CC006B81EF /* Extensions */,
 				56673D4B28BE676A006B81EF /* Main.storyboard */,
+				565354F2298AF9F000C0EAAD /* Config.swift */,
 				56673D4528BE676A006B81EF /* AppDelegate.swift */,
 				56673D4728BE676A006B81EF /* SceneDelegate.swift */,
 				56673D5028BE676C006B81EF /* LaunchScreen.storyboard */,
 				56212BAD29141ECB00892350 /* GoogleService-Info.plist */,
+				565354F0298AF86000C0EAAD /* Config.plist */,
 				56673D4E28BE676C006B81EF /* Assets.xcassets */,
 				56673D5328BE676C006B81EF /* Info.plist */,
 				56F06655290AF0250004EBFF /* HO-Pet-DB.xcdatamodeld */,
@@ -198,10 +211,20 @@
 			path = BreedView;
 			sourceTree = "<group>";
 		};
+		56BC92372995568800F2DEF4 /* SearchView */ = {
+			isa = PBXGroup;
+			children = (
+				56BC9238299556A400F2DEF4 /* SearchViewController.swift */,
+				56BC923C2995645600F2DEF4 /* breedCell.swift */,
+			);
+			path = SearchView;
+			sourceTree = "<group>";
+		};
 		56CFD61828C8FEAE003F7E12 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				56CFD61928C8FEBB003F7E12 /* Model.swift */,
+				56CFD61928C8FEBB003F7E12 /* DogModel.swift */,
+				56BC923A2995582B00F2DEF4 /* AllBreedModel.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -298,6 +321,7 @@
 				56212BAE29141ECB00892350 /* GoogleService-Info.plist in Resources */,
 				56673D4F28BE676C006B81EF /* Assets.xcassets in Resources */,
 				56673D4D28BE676A006B81EF /* Main.storyboard in Resources */,
+				565354F1298AF86000C0EAAD /* Config.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -350,7 +374,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				56CFD61A28C8FEBB003F7E12 /* Model.swift in Sources */,
+				56CFD61A28C8FEBB003F7E12 /* DogModel.swift in Sources */,
 				56373AD9290B37CF00954EC4 /* PhotoViewModel.swift in Sources */,
 				564F3A762900429D00E9B1A8 /* UserViewController.swift in Sources */,
 				56373AD7290B2BF400954EC4 /* Entity.swift in Sources */,
@@ -360,11 +384,15 @@
 				56673D4A28BE676A006B81EF /* WelcomeViewController.swift in Sources */,
 				56673D4628BE676A006B81EF /* AppDelegate.swift in Sources */,
 				56673D4828BE676A006B81EF /* SceneDelegate.swift in Sources */,
+				56BC923B2995582B00F2DEF4 /* AllBreedModel.swift in Sources */,
 				56373AD5290B289C00954EC4 /* PhotoDataManager.swift in Sources */,
+				56BC923D2995645600F2DEF4 /* breedCell.swift in Sources */,
 				5689E8B328D8D1FE0071A774 /* HomeViewModel.swift in Sources */,
 				56673D6628BEAFC4006B81EF /* SignInViewController.swift in Sources */,
 				5689E8AF28D8CF930071A774 /* HomeCollectionView.swift in Sources */,
 				56EFFC8228BFA9A900F6E782 /* HomeViewController.swift in Sources */,
+				56BC9239299556A400F2DEF4 /* SearchViewController.swift in Sources */,
+				565354F3298AF9F000C0EAAD /* Config.swift in Sources */,
 				5689E8B128D8D1610071A774 /* HomeObjectCollection.swift in Sources */,
 				564F3A7329003DD500E9B1A8 /* TabBarViewController.swift in Sources */,
 				56673D5D28BEA1E1006B81EF /* UIColor++.swift in Sources */,
