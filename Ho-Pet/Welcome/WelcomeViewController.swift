@@ -19,7 +19,7 @@ class WelcomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initUI()
-        setContrains()
+        setUpContrains()
     }
 
     func initUI() {
@@ -85,7 +85,7 @@ class WelcomeViewController: UIViewController {
             }
 }
     
-    func setContrains() {
+    func setUpContrains() {
         guard let logo = logo , let appName = appName, let buttonStack = buttonStack else  { return }
         
         NSLayoutConstraint.activate([logo.topAnchor.constraint(equalTo: appName.bottomAnchor, constant: WelcomeConstants.heightElements),
